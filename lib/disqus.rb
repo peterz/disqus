@@ -1,5 +1,7 @@
 require 'disqus/widget'
-  
+require 'hmac/sha1'
+require 'base64'
+
 # == From the {Disqus Website}[http://disqus.com]:
 
 # "Disqus, pronounced "discuss", is a service and tool for web comments and
@@ -30,7 +32,8 @@ module Disqus
     :hide_mods => true,
     :num_items => 15,
     :show_powered_by => true,
-    :orientation => "horizontal"
+    :orientation => "horizontal",
+    :secret_key => ""
   }
   
   # Disqus defaults:
@@ -43,6 +46,7 @@ module Disqus
   #  :num_items => 15,
   #  :show_powered_by => true,
   #  :orientation => "horizontal"
+  #  :secret_key => ""
   def self.defaults
     @defaults
   end

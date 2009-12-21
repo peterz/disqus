@@ -15,6 +15,13 @@ module Disqus
       @display_name.blank? ? @username : @display_name
     end
 
+    def signature
+      timestamp = Time.now.to_i.to_s
+      base64    = Base64.encode64(self.to_json).chomp.gsub(/\n/,'')
+      hmac      = HMAC::SHA1.hexdigest(Disqus::defaults[:secret_key], base64 + ' ' + timestamp)
+      signature = base64 + ' ' + hmac + ' ' + timestamp
+    end
+
   end
 
   class AnonymousAuthor < BaseAuthor
