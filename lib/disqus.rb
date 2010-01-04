@@ -33,7 +33,8 @@ module Disqus
     :num_items => 15,
     :show_powered_by => true,
     :orientation => "horizontal",
-    :secret_key => ""
+    :secret_key => "",
+    :api_version => "1.1"
   }
   
   # Disqus defaults:

@@ -89,6 +89,29 @@ module Disqus
         JSON.parse(get('get_forum_list', :user_api_key => opts[:api_key]))
       end
 
+      # Returns posts from a forum specified by id
+      # Required options hash elements:
+      #
+      # * <tt>:forum_id</tt> - the unique id of the forum
+      # * <tt>:api_key</tt> - The User's API key (defaults to Disqus::defaults[:api_key])
+      # Optional:
+      #
+      # * <tt>:limit</tt>  - number of entries that should be included in the response. Default is 25
+      # * <tt>:start</tt>  - starting point for the query. Default is 0
+      # * <tt>:filter</tt> - type of entries that should be returned
+      # * <tt>:exclude</tt> - type of entries that should be excluded from the response
+      def get_forum_posts(opts = {})
+        opts[:api_key] ||= Disqus::defaults[:api_key]
+        opts[:api_version] ||= Disqus::defaults[:api_version]
+        JSON.parse(get('get_forum_posts', :user_api_key => opts[:api_key],
+                                          :forum_id     => opts[:forum_id],
+                                          :limit        => opts[:limit],
+                                          :start        => opts[:start],
+                                          :filter       => opts[:filter],
+                                          :exclude      => opts[:exclude],
+                                          :api_version  => opts[:api_version]))
+      end
+
       # Returns A string which is the Forum Key for the given forum.
       # 
       # Required options hash elements:
@@ -114,6 +137,23 @@ module Disqus
         JSON.parse(get('get_thread_list', :forum_id => opts[:forum_id], :forum_api_key => opts[:forum_api_key]))
       end
       
+      # Returns: An array of hashes representing all updated threads belonging to the
+      # given forum. 
+      #  
+      # Required options hash elements:
+      #
+      # * <tt>:user_api_key</tt> - The User's API key (defaults to Disqus::defaults[:api_key])
+      # * <tt>:forum_id</tt> - the API key for the forum
+      # * <tt>:since</tt> - start date for new posts in format: 2009-03-30T15:41, Timezone: UTC
+      # * <tt>:api_version</tt> - must be 1.1
+      def get_updated_threads(opts = {})
+        opts[:api_version] ||= Disqus::defaults[:api_version]
+        JSON.parse(get('get_updated_threads', :user_api_key => opts[:user_api_key],
+                                              :forum_id     => opts[:forum_id],
+                                              :since        => opts[:since],
+                                              :api_version  => opts[:api_version]))
+      end
+
       # Returns a hash having thread_ids as keys and 2-element arrays as
       # values. 
       #
