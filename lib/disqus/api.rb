@@ -105,8 +105,8 @@ module Disqus
         opts[:api_version] ||= Disqus::defaults[:api_version]
         JSON.parse(get('get_forum_posts', :user_api_key => opts[:api_key],
                                           :forum_id     => opts[:forum_id],
-                                          :limit        => opts[:limit],
-                                          :start        => opts[:start],
+                                          :limit        => opts[:limit] ||= 25,
+                                          :start        => opts[:start] ||= 0,
                                           :filter       => opts[:filter],
                                           :exclude      => opts[:exclude],
                                           :api_version  => opts[:api_version]))
