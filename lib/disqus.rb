@@ -1,6 +1,5 @@
 require 'disqus/widget'
 require 'hmac/sha1'
-require 'base64'
 
 # == From the {Disqus Website}[http://disqus.com]:
 
