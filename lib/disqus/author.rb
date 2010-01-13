@@ -16,7 +16,7 @@ module Disqus
     end
     
     def to_json
-      { :username => @username, :id => @id, :email => @email_hash, :avatar => nil }.reject { |k,v| v.nil? }.to_json
+      { :username => @username, :id => @id, :email => @email_hash, :avatar => @has_avatar }.reject { |k,v| v.nil? }.to_json
     end
     
     def signature
